@@ -8,7 +8,7 @@
     "check:types": "tsc -b",
     "check": "run-p \"check:*\"",
     "dev:remix": "remix watch",
-    "dev:wrangler": "cross-env NODE_ENV=development wrangler pages --compatibility-date=2022-12-07 dev ./public",
+    "dev:wrangler": "cross-env NODE_ENV=development wrangler pages --compatibility-date=2022-12-07 dev ./public --binding $(cat .env)",
     "dev": "remix build && run-p \"dev:*\"",
     "fix:format": "npm run check:format -- --write",
     "fix:lint": "npm run check:lint -- --fix",
