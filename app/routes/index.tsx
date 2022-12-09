@@ -1,10 +1,11 @@
 import type { LoaderArgs } from '@remix-run/cloudflare';
+import { json } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
 import { getMatchups } from '~/models/matchup.server';
 
 export const loader = async ({ context }: LoaderArgs) => {
   const matchups = await getMatchups({ airtableToken: context.AIRTABLE_TOKEN });
-  return matchups;
+  return json(matchups);
 };
 
 export default function Index() {
@@ -27,9 +28,9 @@ export default function Index() {
 
       <div>
         <h2>Matchups</h2>
-        {matchups.map((matchup) => (
+        {matchups.map(({ id, Date, Division, Items, Seed }) => (
           <div
-            key={matchup.id}
+            key={id}
             style={{
               padding: 8,
               margin: 8,
@@ -38,7 +39,10 @@ export default function Index() {
               whiteSpace: 'pre',
             }}
           >
-            {JSON.stringify(matchup, null, 2)}
+            <p>Date: {Date}</p>
+            <p>Division: {Division}</p>
+            <p>Items: {Items}</p>
+            <p>Seed: {Seed}</p>
           </div>
         ))}
       </div>
