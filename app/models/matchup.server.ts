@@ -6,13 +6,13 @@ import { getItems } from './items.server';
 export type BaseMatchup = {
   id: string;
   date: string;
-  itemId1: string | undefined;
-  itemId2: string | undefined;
+  itemId1?: string;
+  itemId2?: string;
 };
 
 export type Matchup = Omit<BaseMatchup, 'itemId1' | 'itemId2'> & {
-  item1: Item | undefined;
-  item2: Item | undefined;
+  item1?: Item;
+  item2?: Item;
 };
 
 const fieldsSchema = z.object({
