@@ -1,15 +1,23 @@
 import { z } from 'zod';
 import { config, createRequest, createResponseSchema } from './base.server';
+import type { Item } from './items.server';
+import { getItems } from './items.server';
 
-export type Matchup = {
+export type BaseMatchup = {
   id: string;
   date: string;
-  items: string[];
+  itemId1: string | undefined;
+  itemId2: string | undefined;
+};
+
+export type Matchup = Omit<BaseMatchup, 'itemId1' | 'itemId2'> & {
+  item1: Item | undefined;
+  item2: Item | undefined;
 };
 
 const fieldsSchema = z.object({
   Date: z.string(),
-  Items: z.array(z.string()),
+  Items: z.tuple([z.string().optional(), z.string().optional()]),
 });
 
 export async function getMatchups({
@@ -28,8 +36,19 @@ export async function getMatchups({
     return {
       date: fields.Date,
       id: matchup.id,
-      items: fields.Items,
+      itemId1: fields.Items[0],
+      itemId2: fields.Items[1],
     };
   });
-  return matchups;
+
+  const items = await getItems({ airtableToken });
+  const matchupsWithItems = matchups.map((matchup) => {
+    const { itemId1, itemId2, ...baseMatchup } = matchup;
+    return {
+      ...baseMatchup,
+      item1: items.find((item) => item.id === itemId1),
+      item2: items.find((item) => item.id === itemId2),
+    };
+  });
+  return matchupsWithItems;
 }

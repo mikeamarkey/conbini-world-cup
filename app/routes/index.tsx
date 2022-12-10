@@ -1,18 +1,33 @@
 import type { LoaderArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
-import { getItems } from '~/models/items.server';
+import type { Item as ItemModel } from '~/models/items.server';
 import { getMatchups } from '~/models/matchup.server';
 
 export const loader = async ({ context }: LoaderArgs) => {
   const matchups = await getMatchups({ airtableToken: context.AIRTABLE_TOKEN });
-  const items = await getItems({ airtableToken: context.AIRTABLE_TOKEN });
-  return json({ matchups, items });
+  return json(matchups);
+};
+
+const Item = ({ item }: { item: ItemModel | undefined }) => {
+  return item ? (
+    <div style={{ maxWidth: 300 }}>
+      <p>Name: {item.name}</p>
+      <p>Division: {item.division}</p>
+      <p>Seed: {item.seed}</p>
+      <img style={{ maxWidth: '100%' }} src={item.image} alt={item.name} />
+    </div>
+  ) : (
+    <div style={{ maxWidth: 300 }}>
+      <p>Name: TBA</p>
+      <p>Division: TBA</p>
+      <p>Seed: TBA</p>
+    </div>
+  );
 };
 
 export default function Index() {
-  const { matchups, items } = useLoaderData<typeof loader>();
-  console.log(items);
+  const matchups = useLoaderData<typeof loader>();
 
   return (
     <div>
@@ -31,7 +46,7 @@ export default function Index() {
 
       <div>
         <h2>Matchups</h2>
-        {matchups.map(({ id, date, items }) => (
+        {matchups.map(({ id, date, item1, item2 }) => (
           <div
             key={id}
             style={{
@@ -43,7 +58,10 @@ export default function Index() {
             }}
           >
             <p>Date: {date}</p>
-            <p>Items: {items.join('  ///  ')}</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Item item={item1} />
+              <Item item={item2} />
+            </div>
           </div>
         ))}
       </div>
