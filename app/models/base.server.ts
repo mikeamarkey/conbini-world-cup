@@ -1,18 +1,15 @@
 import { z } from 'zod';
 
 const airtable = {
-  apiUrl: 'https://api.airtable.com/v0',
-  baseId: 'appy4ar57OXD2UHpz',
-  matchupsId: 'tblbPELOSCf0HguCJ',
-  itemsId: 'tblD6OT0Zms4OeRkn',
+  baseUrl: 'https://api.airtable.com/v0/appy4ar57OXD2UHpz',
+  matchupsQuery: 'tblbPELOSCf0HguCJ?sort%5B0%5D%5Bfield%5D=Date',
+  itemsQuery: 'tblD6OT0Zms4OeRkn',
 };
 
 export const config = {
   airtable: {
-    matchupsUrl: [airtable.apiUrl, airtable.baseId, airtable.matchupsId].join(
-      '/'
-    ),
-    itemsUrl: [airtable.apiUrl, airtable.baseId, airtable.itemsId].join('/'),
+    matchupsUrl: `${airtable.baseUrl}/${airtable.matchupsQuery}`,
+    itemsUrl: `${airtable.baseUrl}/${airtable.itemsQuery}`,
   },
 };
 
