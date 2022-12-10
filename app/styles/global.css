@@ -1,0 +1,26 @@
+:root {
+  --color-primary: hsl(216, 74%, 58%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-black: hsl(0, 0%, 0%);
+}
+
+#app {
+  margin: 16px;
+  padding-bottom: 16px;
+}
+
+@media screen and (max-width: 480px) {
+  #app {
+    margin: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+html,
+body {
+  background-color: var(--color-primary);
+}
+
+a {
+  color: inherit;
+}

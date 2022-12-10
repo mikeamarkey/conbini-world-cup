@@ -1,0 +1,13 @@
+.matchup {
+  padding: 8px;
+  margin: 16px 0;
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-black);
+  white-space: pre;
+}
+
+.matchupWrapper {
+  display: flex;
+  justify-content: space-between;
+}

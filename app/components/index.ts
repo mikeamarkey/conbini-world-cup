@@ -1,2 +1,2 @@
-export { Item } from './Item';
-export { Matchup } from './Matchup';
+export * from './Item';
+export * from './Matchup';

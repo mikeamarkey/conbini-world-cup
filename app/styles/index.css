@@ -1,0 +1,12 @@
+.index {
+  color: var(--color-white);
+}
+
+.indexLink {
+  margin: 8px;
+  font-size: 20px;
+}
+
+.indexMatchups {
+  margin-top: 16px;
+}
