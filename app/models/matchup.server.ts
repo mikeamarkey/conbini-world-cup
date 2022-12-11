@@ -1,18 +1,13 @@
 import { z } from 'zod';
+import type { MatchupProps } from '~/components';
 import { config, createRequest, createResponseSchema } from './base.server';
-import type { Item } from './items.server';
 import { getItems } from './items.server';
 
-export type BaseMatchup = {
+type BaseMatchup = {
   id: string;
   date: string;
   itemId1?: string;
   itemId2?: string;
-};
-
-export type Matchup = Omit<BaseMatchup, 'itemId1' | 'itemId2'> & {
-  item1?: Item;
-  item2?: Item;
 };
 
 const fieldsSchema = z.object({
@@ -47,7 +42,7 @@ export async function getMatchups({
   airtableToken,
 }: {
   airtableToken: unknown;
-}): Promise<Matchup[]> {
+}): Promise<MatchupProps[]> {
   const [baseMatchups, items] = await Promise.all([
     getBaseMatchups({ airtableToken }),
     getItems({ airtableToken }),

@@ -40,7 +40,7 @@ export default function Index() {
         <h2>Matchups</h2>
         {matchups.map((matchup) => (
           <div key={matchup.id}>
-            <Matchup matchup={matchup} />
+            <Matchup {...matchup} />
           </div>
         ))}
       </div>

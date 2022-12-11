@@ -1,19 +1,10 @@
 import { z } from 'zod';
+import type { ItemProps } from '~/components';
+import { divisions } from '~/components';
 import { config, createRequest, createResponseSchema } from './base.server';
 
-const division = ['Hot Box', 'Snack', 'Meal', 'Beverage'] as const;
-type Division = typeof division[number];
-
-export type Item = {
-  division: Division;
-  id: string;
-  image: string;
-  name: string;
-  seed: number;
-};
-
 const fieldsSchema = z.object({
-  'Division': z.enum(division),
+  'Division': z.enum(divisions),
   'Image': z
     .array(
       z.object({
@@ -29,7 +20,7 @@ export async function getItems({
   airtableToken,
 }: {
   airtableToken: unknown;
-}): Promise<Item[]> {
+}): Promise<ItemProps[]> {
   const itemsData = await createRequest(
     airtableToken,
     config.airtable.itemsUrl

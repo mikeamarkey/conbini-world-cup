@@ -1,10 +1,13 @@
 import type { LinksFunction } from '@remix-run/cloudflare';
-import type { Matchup as MatchupModel } from '~/models/matchup.server';
+import type { ItemProps } from '../Item';
 import { Item, itemStyles } from '../Item';
 import styles from './styles.css';
 
-type MatchupProps = {
-  matchup: MatchupModel;
+export type MatchupProps = {
+  id: string;
+  date: string;
+  item1?: ItemProps;
+  item2?: ItemProps;
 };
 
 export const matchupStyles: LinksFunction = () => [
@@ -15,13 +18,13 @@ export const matchupStyles: LinksFunction = () => [
   },
 ];
 
-export const Matchup = ({ matchup }: MatchupProps) => {
+export const Matchup = ({ date, item1, item2 }: MatchupProps) => {
   return (
     <div className="matchup">
-      <p>Date: {matchup.date}</p>
+      <p>Date: {date}</p>
       <div className="matchupWrapper">
-        <Item item={matchup.item1} />
-        <Item item={matchup.item2} />
+        <Item item={item1} />
+        <Item item={item2} />
       </div>
     </div>
   );

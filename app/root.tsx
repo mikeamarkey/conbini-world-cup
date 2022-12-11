@@ -10,7 +10,7 @@ import {
 import reset from '~/styles/reset.css';
 import global from '~/styles/global.css';
 
-function linksFn() {
+export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
@@ -25,11 +25,7 @@ function linksFn() {
       href: 'https://fonts.googleapis.com/css?family=Poppins:Medium|Noto+Sans:Regular"',
     },
   ];
-}
-
-// FIXME: re-exporting function because of issue with arrow function
-// https://github.com/remix-run/remix/issues/4155
-export const links: LinksFunction = linksFn;
+};
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
