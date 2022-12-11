@@ -10,20 +10,30 @@ import {
 import reset from '~/styles/reset.css';
 import global from '~/styles/global.css';
 
-export const links: LinksFunction = () => [
-  {
-    rel: 'stylesheet',
-    href: reset,
-  },
-  {
-    rel: 'stylesheet',
-    href: global,
-  },
-];
+function linksFn() {
+  return [
+    {
+      rel: 'stylesheet',
+      href: reset,
+    },
+    {
+      rel: 'stylesheet',
+      href: global,
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css?family=Poppins:Medium|Noto+Sans:Regular"',
+    },
+  ];
+}
+
+// FIXME: re-exporting function because of issue with arrow function
+// https://github.com/remix-run/remix/issues/4155
+export const links: LinksFunction = linksFn;
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
-  title: 'New Remix App',
+  title: 'Conbini World Cup',
   viewport: 'width=device-width,initial-scale=1',
 });
 

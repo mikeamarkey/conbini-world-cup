@@ -4,6 +4,10 @@
   --color-black: #000000;
 }
 
+html {
+  font-family: 'Poppins', 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
 body {
   margin: 16px;
   padding-bottom: 16px;
