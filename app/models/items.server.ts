@@ -1,8 +1,11 @@
 import { z } from 'zod';
 import { config, createRequest, createResponseSchema } from './base.server';
 
+const division = ['Hot Box', 'Snack', 'Meal', 'Beverage'] as const;
+type Division = typeof division[number];
+
 export type Item = {
-  division: string;
+  division: Division;
   id: string;
   image: string;
   name: string;
@@ -10,12 +13,14 @@ export type Item = {
 };
 
 const fieldsSchema = z.object({
-  'Division': z.string(),
-  'Image': z.array(
-    z.object({
-      url: z.string(),
-    })
-  ),
+  'Division': z.enum(division),
+  'Image': z
+    .array(
+      z.object({
+        url: z.string(),
+      })
+    )
+    .min(1),
   'Item Name': z.string(),
   'Seed': z.number(),
 });
@@ -38,7 +43,7 @@ export async function getItems({
       name: fields['Item Name'],
       seed: fields.Seed,
       division: fields.Division,
-      image: fields.Image?.[0]?.url,
+      image: fields.Image[0].url,
     };
   });
   return items;
