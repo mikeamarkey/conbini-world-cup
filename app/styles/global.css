@@ -1,11 +1,7 @@
 :root {
-  --color-primary: hsl(216, 74%, 58%);
-  --color-white: hsl(0, 0%, 100%);
-  --color-black: hsl(0, 0%, 0%);
-}
-
-html {
-  background-color: var(--color-primary);
+  --color-primary: #4786e3;
+  --color-white: #ffffff;
+  --color-black: #000000;
 }
 
 body {
