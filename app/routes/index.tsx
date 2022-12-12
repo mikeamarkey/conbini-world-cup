@@ -23,7 +23,6 @@ export default function Index() {
 
   return (
     <div className="index">
-      <h1>Conbini World Cup 2022</h1>
       <div className="indexLink">
         <a href="https://twitter.com/conbiniboys/status/1599411940358438913?s=20&t=TrVXXdz6UPGXZUHToYEXYg">
           Information
