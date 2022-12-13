@@ -5,14 +5,19 @@ import { getItems } from './items.server';
 
 type BaseMatchup = {
   id: string;
-  date: string;
+  date?: string;
   itemId1?: string;
   itemId2?: string;
+  round: string;
+  tweet?: string;
 };
 
 const fieldsSchema = z.object({
-  Date: z.string(),
-  Items: z.tuple([z.string().optional(), z.string().optional()]),
+  'Date': z.string().optional(),
+  'Item 1': z.array(z.string()).optional(),
+  'Item 2': z.array(z.string()).optional(),
+  'Round': z.string(),
+  'Tweet': z.string().optional(),
 });
 
 export async function getBaseMatchups({
@@ -31,8 +36,10 @@ export async function getBaseMatchups({
     return {
       date: fields.Date,
       id: baseMatchup.id,
-      itemId1: fields.Items[0],
-      itemId2: fields.Items[1],
+      itemId1: fields['Item 1']?.[0] ?? undefined,
+      itemId2: fields['Item 2']?.[0] ?? undefined,
+      round: fields.Round,
+      tweet: fields.Tweet,
     };
   });
   return baseMatchups;

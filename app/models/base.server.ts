@@ -2,7 +2,8 @@ import { z } from 'zod';
 
 const airtable = {
   baseUrl: 'https://api.airtable.com/v0/appy4ar57OXD2UHpz',
-  matchupsQuery: 'tblbPELOSCf0HguCJ?sort%5B0%5D%5Bfield%5D=Date',
+  matchupsQuery:
+    'tblPkBoemy1L6Y7ba?sort%5B0%5D%5Bfield%5D=Date&sort%5B0%5D%5Bdirection%5D=asc',
   itemsQuery: 'tblD6OT0Zms4OeRkn',
 };
 
