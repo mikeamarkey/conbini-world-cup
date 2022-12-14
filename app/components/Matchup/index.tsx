@@ -30,13 +30,14 @@ export const Matchup = ({ date, item1, item2, round, tweet }: MatchupProps) => {
   return (
     <div className="matchup">
       <div className="matchupDetails">
-        <h3>{formattedDate}</h3>
-        <p>{round}</p>
+        <h3 className="matchupDetailsDate">{formattedDate}</h3>
+        <p className="matchupDetailsRound">{round}</p>
       </div>
 
       <div className="matchupItems">
-        <Item item={item1} />
-        <Item item={item2} />
+        <Item position="left" item={item1} />
+        <div className="matchupItemsVs">VS</div>
+        <Item position="right" item={item2} />
       </div>
 
       {tweet && (

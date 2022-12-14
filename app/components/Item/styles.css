@@ -1,7 +1,43 @@
 .item {
-  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item--right {
+  flex-direction: row-reverse;
 }
 
 .itemImage {
-  max-height: 200px;
+  object-fit: contain;
+  height: 128px;
+  width: 128px;
+}
+
+.itemDetails {
+  margin: 16px 8px;
+}
+
+.item--right .itemDetails {
+  text-align: end;
+}
+
+.itemDetailsName {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .itemImage {
+    width: 64px;
+    height: 64px;
+  }
+
+  .itemDetailsDivision {
+    font-size: 12px;
+  }
+
+  .itemDetailsName {
+    font-size: 16px;
+  }
 }
