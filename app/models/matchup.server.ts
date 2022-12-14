@@ -5,7 +5,7 @@ import { getItems } from './items.server';
 
 type BaseMatchup = {
   id: string;
-  date?: string;
+  date: string;
   itemId1?: string;
   itemId2?: string;
   round: string;
@@ -13,7 +13,7 @@ type BaseMatchup = {
 };
 
 const fieldsSchema = z.object({
-  'Date': z.string().optional(),
+  'Date': z.string(),
   'Item 1': z.array(z.string()).optional(),
   'Item 2': z.array(z.string()).optional(),
   'Round': z.string(),
