@@ -8,6 +8,7 @@ export type ItemProps = {
   division: Division;
   id: string;
   image: string;
+  isWinner: boolean;
   name: string;
   position?: 'left' | 'right';
   seed: number;
@@ -26,6 +27,7 @@ const DecidedItem = ({
   name,
   position = 'left',
   seed,
+  isWinner,
 }: ItemProps) => {
   const divisionClassName = division.split(' ').join('').toLowerCase();
   return (
@@ -38,7 +40,14 @@ const DecidedItem = ({
         >
           {division} Divison {`#${seed}`}
         </p>
-        <p className="itemDetailsName">{name}</p>
+        <div className="itemDetailsName">
+          <span>{name}</span>
+          {isWinner && (
+            <div className="winner">
+              <span className="winnerIcon">✓</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -55,12 +64,14 @@ const UndecidedItem = ({ position = 'left' }: Pick<ItemProps, 'position'>) => (
 export const Item = ({
   item,
   position,
+  isWinner,
 }: {
-  item?: ItemProps;
+  item?: Omit<ItemProps, 'isWinner'>;
   position: ItemProps['position'];
+  isWinner: boolean;
 }) => {
   if (item) {
-    return <DecidedItem {...item} position={position} />;
+    return <DecidedItem {...item} isWinner={isWinner} position={position} />;
   }
   return <UndecidedItem position={position} />;
 };

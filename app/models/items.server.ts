@@ -20,7 +20,7 @@ export async function getItems({
   airtableToken,
 }: {
   airtableToken: unknown;
-}): Promise<ItemProps[]> {
+}): Promise<Omit<ItemProps, 'isWinner'>[]> {
   const itemsData = await createRequest(
     airtableToken,
     config.airtable.itemsUrl

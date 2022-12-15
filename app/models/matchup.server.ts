@@ -7,7 +7,9 @@ type BaseMatchup = {
   id: string;
   date: string;
   itemId1?: string;
+  vote1?: number;
   itemId2?: string;
+  vote2?: number;
   round: string;
   tweet?: string;
 };
@@ -15,7 +17,9 @@ type BaseMatchup = {
 const fieldsSchema = z.object({
   'Date': z.string(),
   'Item 1': z.array(z.string()).optional(),
+  'Vote 1': z.number().optional(),
   'Item 2': z.array(z.string()).optional(),
+  'Vote 2': z.number().optional(),
   'Round': z.string(),
   'Tweet': z.string().optional(),
 });
@@ -37,7 +41,9 @@ export async function getBaseMatchups({
       date: fields.Date,
       id: baseMatchup.id,
       itemId1: fields['Item 1']?.[0] ?? undefined,
+      vote1: fields['Vote 1'],
       itemId2: fields['Item 2']?.[0] ?? undefined,
+      vote2: fields['Vote 2'],
       round: fields.Round,
       tweet: fields.Tweet,
     };
@@ -56,11 +62,29 @@ export async function getMatchups({
   ]);
 
   const matchups = baseMatchups.map((baseMatchup) => {
-    const { itemId1, itemId2, ...baseMatchupValues } = baseMatchup;
+    const { itemId1, itemId2, vote1, vote2, ...baseMatchupValues } =
+      baseMatchup;
+
+    const item1 = items.find((item) => item.id === itemId1);
+    const item2 = items.find((item) => item.id === itemId2);
+    const isComplete =
+      typeof vote1 !== 'undefined' && typeof vote2 !== 'undefined';
+
+    const winningItem = !isComplete ? undefined : vote1 > vote2 ? item1 : item2;
+    const winningPercent = !isComplete ? undefined : Math.max(vote1, vote2);
+
     return {
       ...baseMatchupValues,
-      item1: items.find((item) => item.id === itemId1),
-      item2: items.find((item) => item.id === itemId2),
+      item1,
+      item2,
+      winner:
+        winningItem && winningPercent
+          ? {
+              id: winningItem.id,
+              name: winningItem.name,
+              percent: winningPercent,
+            }
+          : undefined,
     };
   });
 

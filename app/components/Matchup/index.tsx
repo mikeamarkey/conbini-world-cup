@@ -7,10 +7,15 @@ import twitter from '~/assets/twitter.png';
 export type MatchupProps = {
   id: string;
   date: string;
-  item1?: ItemProps;
-  item2?: ItemProps;
+  item1?: Omit<ItemProps, 'isWinner'>;
+  item2?: Omit<ItemProps, 'isWinner'>;
   round: string;
   tweet?: string;
+  winner?: {
+    id: ItemProps['id'];
+    name: ItemProps['name'];
+    percent: number;
+  };
 };
 
 export const matchupStyles: LinksFunction = () => [
@@ -21,7 +26,14 @@ export const matchupStyles: LinksFunction = () => [
   },
 ];
 
-export const Matchup = ({ date, item1, item2, round, tweet }: MatchupProps) => {
+export const Matchup = ({
+  date,
+  item1,
+  item2,
+  round,
+  tweet,
+  winner,
+}: MatchupProps) => {
   const formattedDate = new Intl.DateTimeFormat('en-US', {
     dateStyle: 'full',
     timeStyle: 'short',
@@ -35,9 +47,17 @@ export const Matchup = ({ date, item1, item2, round, tweet }: MatchupProps) => {
       </div>
 
       <div className="matchupItems">
-        <Item position="left" item={item1} />
+        <Item
+          position="left"
+          isWinner={winner ? item1?.id === winner.id : false}
+          item={item1}
+        />
         <div className="matchupItemsVs">VS</div>
-        <Item position="right" item={item2} />
+        <Item
+          position="right"
+          isWinner={winner ? item2?.id === winner.id : false}
+          item={item2}
+        />
       </div>
 
       {tweet && (
@@ -47,13 +67,28 @@ export const Matchup = ({ date, item1, item2, round, tweet }: MatchupProps) => {
           target="_blank"
           rel="noreferrer"
         >
-          <span className="matchupActionsText">Cast your vote!</span>
-          <img
-            className="matchupActionsIcon"
-            width="24"
-            src={twitter}
-            alt="Cast your vote!"
-          />
+          {winner ? (
+            <>
+              <span className="matchupActionsText">
+                <span className="emphasis">{winner.name}</span> wins with {` `}
+                <span className="emphasis">{winner.percent}%</span> of the vote!
+              </span>
+              <img
+                className="matchupActionsIcon"
+                src={twitter}
+                alt="See the result"
+              />
+            </>
+          ) : (
+            <>
+              <span className="matchupActionsText">Cast your vote now!</span>
+              <img
+                className="matchupActionsIcon"
+                src={twitter}
+                alt="Cast your vote"
+              />
+            </>
+          )}
         </a>
       )}
     </div>

@@ -12,6 +12,10 @@
   text-align: end;
 }
 
+.item--right .itemDetailsName {
+  flex-direction: row-reverse;
+}
+
 .itemImage {
   object-fit: contain;
   height: 128px;
@@ -47,9 +51,28 @@
 }
 
 .itemDetailsName {
+  display: flex;
+  align-items: center;
   margin-top: 4px;
   font-weight: bold;
   font-size: 18px;
+}
+
+.winner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-success);
+  color: var(--color-white);
+}
+
+.winnerIcon {
+  font-size: 12px;
+  margin: 1px 2px 0 0;
 }
 
 @media screen and (max-width: 768px) {

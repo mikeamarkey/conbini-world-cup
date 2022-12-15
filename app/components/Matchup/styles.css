@@ -35,12 +35,14 @@
 .matchupActions {
   display: flex;
   justify-content: center;
+  align-items: center;
   text-decoration: none;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .matchupActionsIcon {
   margin-left: 8px;
+  height: 18px;
 }
 
 @media screen and (max-width: 768px) {
