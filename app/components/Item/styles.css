@@ -8,6 +8,10 @@
   flex-direction: row-reverse;
 }
 
+.item--right .itemDetails {
+  text-align: end;
+}
+
 .itemImage {
   object-fit: contain;
   height: 128px;
@@ -18,19 +22,40 @@
   margin: 16px 8px;
 }
 
-.item--right .itemDetails {
-  text-align: end;
+.itemDetailsDivision {
+  display: inline-block;
+  padding: 0 6px;
+  font-size: 12px;
+  border-radius: 16px;
+  color: var(--color-white);
+}
+
+.itemDetailsDivision--hotbox {
+  background-color: var(--color-division-hotbox);
+}
+
+.itemDetailsDivision--snack {
+  background-color: var(--color-division-snack);
+}
+
+.itemDetailsDivision--meal {
+  background-color: var(--color-division-meal);
+}
+
+.itemDetailsDivision--beverage {
+  background-color: var(--color-division-beverage);
 }
 
 .itemDetailsName {
+  margin-top: 4px;
   font-weight: bold;
   font-size: 18px;
 }
 
 @media screen and (max-width: 768px) {
   .itemImage {
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
   }
 
   .itemDetailsDivision {
@@ -39,5 +64,16 @@
 
   .itemDetailsName {
     font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .item--left {
+    align-self: start;
+  }
+
+  .item--right {
+    margin-top: 16px;
+    align-self: end;
   }
 }

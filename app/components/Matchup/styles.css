@@ -1,6 +1,7 @@
 .matchup {
   padding: 16px;
-  margin: 16px 0;
+  margin: 16px auto;
+  max-width: 1000px;
   border-radius: 8px;
   background-color: var(--color-white);
 }
@@ -60,7 +61,7 @@
   }
 
   .matchupDetailsRound {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 

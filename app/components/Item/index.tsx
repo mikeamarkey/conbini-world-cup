@@ -26,18 +26,23 @@ const DecidedItem = ({
   name,
   position = 'left',
   seed,
-}: ItemProps) => (
-  <div className={`item item--${position}`}>
-    <img className="itemImage" src={image} alt={name} />
+}: ItemProps) => {
+  const divisionClassName = division.split(' ').join('').toLowerCase();
+  return (
+    <div className={`item item--${position}`}>
+      <img className="itemImage" src={image} alt={name} />
 
-    <div className="itemDetails">
-      <p className="itemDetailsDivision">
-        {division} Divison {`#${seed}`}
-      </p>
-      <p className="itemDetailsName">{name}</p>
+      <div className="itemDetails">
+        <p
+          className={`itemDetailsDivision itemDetailsDivision--${divisionClassName}`}
+        >
+          {division} Divison {`#${seed}`}
+        </p>
+        <p className="itemDetailsName">{name}</p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const UndecidedItem = ({ position = 'left' }: Pick<ItemProps, 'position'>) => (
   <div className={`item item--${position}`}>

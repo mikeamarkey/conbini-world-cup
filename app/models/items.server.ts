@@ -13,7 +13,7 @@ const fieldsSchema = z.object({
     )
     .min(1),
   'Item Name': z.string(),
-  'Seed': z.number(),
+  'Seed 2022': z.number(),
 });
 
 export async function getItems({
@@ -32,7 +32,7 @@ export async function getItems({
     return {
       id: item.id,
       name: fields['Item Name'],
-      seed: fields.Seed,
+      seed: fields['Seed 2022'],
       division: fields.Division,
       image: fields.Image[0].url,
     };
