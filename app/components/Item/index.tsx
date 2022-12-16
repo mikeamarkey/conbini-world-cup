@@ -1,5 +1,6 @@
 import type { LinksFunction } from '@remix-run/cloudflare';
 import styles from './styles.css';
+import comingsoon from '~/assets/comingsoon.jpeg';
 
 export const divisions = ['Hot Box', 'Snack', 'Meal', 'Beverage'] as const;
 type Division = typeof divisions[number];
@@ -51,9 +52,14 @@ const DecidedItem = ({
 
 const UndecidedItem = ({ position = 'left' }: Pick<ItemProps, 'position'>) => (
   <div className={`item item--${position}`}>
-    <p>Name: TBA</p>
-    <p>Division: TBA</p>
-    <p>Seed: TBA</p>
+    <img className="itemImage" src={comingsoon} alt="TBD" />
+
+    <div className="itemDetails">
+      <p className="itemDetailsDivision">Divison & Seed TBD</p>
+      <div className="itemDetailsName">
+        <span>TBD</span>
+      </div>
+    </div>
   </div>
 );
 

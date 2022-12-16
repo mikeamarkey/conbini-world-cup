@@ -57,7 +57,7 @@ export default function Index() {
       <div className="indexMatchups">
         <h2>Recent Matches</h2>
         {completedMatches.map((matchup) => (
-          <div key={matchup.id}>
+          <div className="indexMatchupsDisabled" key={matchup.id}>
             <Matchup {...matchup} />
           </div>
         ))}
@@ -66,7 +66,7 @@ export default function Index() {
       <div className="indexMatchups">
         <h2>Future Matches</h2>
         {futureMatches.map((matchup) => (
-          <div key={matchup.id}>
+          <div className="indexMatchupsDisabled" key={matchup.id}>
             <Matchup {...matchup} />
           </div>
         ))}

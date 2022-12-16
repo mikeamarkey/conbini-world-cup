@@ -34,6 +34,10 @@
   color: var(--color-white);
 }
 
+.itemDetailsDivision {
+  background-color: darkgray;
+}
+
 .itemDetailsDivision--hotbox {
   background-color: var(--color-division-hotbox);
 }

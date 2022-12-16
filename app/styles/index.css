@@ -18,3 +18,11 @@
 .indexMatchups {
   margin-top: 16px;
 }
+
+.indexMatchups + .indexMatchups {
+  margin-top: 48px;
+}
+
+.indexMatchupsDisabled {
+  opacity: 0.6;
+}
