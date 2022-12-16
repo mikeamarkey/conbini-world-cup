@@ -54,28 +54,13 @@
   display: flex;
   align-items: center;
   margin-top: 4px;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 18px;
 }
 
-.winner {
-  position: relative;
-  margin-left: 8px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-success);
-}
-
-.winnerIcon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 10px;
-  font-synthesis: none;
-  line-height: 0.5;
-  color: var(--color-white);
-  transform: translate(-50%, -50%);
+.itemDetailsNameWinner {
+  display: inline-block;
+  margin: 0 4px;
 }
 
 @media screen and (max-width: 768px) {
@@ -90,16 +75,5 @@
 
   .itemDetailsName {
     font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .item--left {
-    align-self: start;
-  }
-
-  .item--right {
-    margin-top: 16px;
-    align-self: end;
   }
 }

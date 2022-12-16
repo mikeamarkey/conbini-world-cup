@@ -1,6 +1,5 @@
 :root {
   --color-primary: #4786e3;
-  --color-success: #4bb543;
   --color-white: #ffffff;
   --color-black: #000000;
   --color-border: #d9dbde;
@@ -20,5 +19,5 @@ body {
 }
 
 .emphasis {
-  font-weight: bold;
+  font-weight: 600;
 }

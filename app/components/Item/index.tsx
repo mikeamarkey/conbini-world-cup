@@ -42,11 +42,7 @@ const DecidedItem = ({
         </p>
         <div className="itemDetailsName">
           <span>{name}</span>
-          {isWinner && (
-            <div className="winner">
-              <span className="winnerIcon">✔</span>
-            </div>
-          )}
+          {isWinner && <span className="itemDetailsNameWinner">👍</span>}
         </div>
       </div>
     </div>
