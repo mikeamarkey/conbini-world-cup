@@ -76,10 +76,18 @@ export async function getMatchups({
     const winningItem = !isComplete ? undefined : vote1 > vote2 ? item1 : item2;
     const winningPercent = !isComplete ? undefined : Math.max(vote1, vote2);
 
+    const matchState: MatchupProps['matchState'] =
+      typeof baseMatchupValues.remainingHours === 'undefined'
+        ? 'scheduled'
+        : baseMatchupValues.remainingHours < 0
+        ? 'complete'
+        : 'ongoing';
+
     return {
       ...baseMatchupValues,
       item1,
       item2,
+      matchState,
       winner:
         winningItem && winningPercent
           ? {

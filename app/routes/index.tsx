@@ -20,6 +20,16 @@ export const links: LinksFunction = () => [
 
 export default function Index() {
   const matchups = useLoaderData<typeof loader>();
+  const ongoingMatches = matchups.filter(
+    (matchup) => matchup.matchState === 'ongoing'
+  );
+  const completedMatches = matchups
+    .filter((matchup) => matchup.matchState === 'complete')
+    .reverse()
+    .slice(0, 5);
+  const futureMatches = matchups.filter(
+    (matchup) => matchup.matchState === 'scheduled'
+  );
 
   return (
     <div className="index">
@@ -36,8 +46,26 @@ export default function Index() {
       </div>
 
       <div className="indexMatchups">
-        <h2>Matchups</h2>
-        {matchups.map((matchup) => (
+        <h2>Ongoing Matches</h2>
+        {ongoingMatches.map((matchup) => (
+          <div key={matchup.id}>
+            <Matchup {...matchup} />
+          </div>
+        ))}
+      </div>
+
+      <div className="indexMatchups">
+        <h2>Recent Matches</h2>
+        {completedMatches.map((matchup) => (
+          <div key={matchup.id}>
+            <Matchup {...matchup} />
+          </div>
+        ))}
+      </div>
+
+      <div className="indexMatchups">
+        <h2>Future Matches</h2>
+        {futureMatches.map((matchup) => (
           <div key={matchup.id}>
             <Matchup {...matchup} />
           </div>

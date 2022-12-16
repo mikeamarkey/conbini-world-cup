@@ -9,6 +9,7 @@ export type MatchupProps = {
   date: string;
   item1?: Omit<ItemProps, 'isWinner'>;
   item2?: Omit<ItemProps, 'isWinner'>;
+  matchState: 'complete' | 'ongoing' | 'scheduled';
   remainingHours?: number;
   round: string;
   tweet?: string;
@@ -39,7 +40,7 @@ const getDateDisplay = (
   }
 
   if (hours > 0) {
-    return `Current match (${hours} hours left)`;
+    return `${hours} hours remaining`;
   }
 
   return 'Match complete';
@@ -98,7 +99,9 @@ export const Matchup = ({
             </>
           ) : (
             <>
-              <span className="matchupActionsText">Cast your vote now!</span>
+              <span className="matchupActionsText">
+                <span className="emphasis">Cast your vote now!</span>
+              </span>
               <img
                 className="matchupActionsIcon"
                 src={twitter}
