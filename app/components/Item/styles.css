@@ -76,17 +76,4 @@
     margin-top: 16px;
     align-self: end;
   }
-
-  .itemImage {
-    width: 96px;
-    height: 96px;
-  }
-
-  .itemDetailsDivision {
-    font-size: 12px;
-  }
-
-  .itemDetailsName {
-    font-size: 16px;
-  }
 }
