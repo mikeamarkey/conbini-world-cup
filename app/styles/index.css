@@ -1,7 +1,7 @@
 .tablist {
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
   padding: 0 48px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-white);
 }
 
 .tablistItem {
@@ -9,8 +9,9 @@
   border: unset;
   border-bottom: 4px solid transparent;
   background: inherit;
-  cursor: pointer;
+  color: inherit;
   outline: none;
+  cursor: pointer;
 }
 
 .tablistItem[data-headlessui-state='selected'] {

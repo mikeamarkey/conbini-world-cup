@@ -1,7 +1,7 @@
 :root {
   --color-primary: #4786e3;
-  --color-white: #ffffff;
-  --color-black: #000000;
+  --color-white: #fff;
+  --color-black: #000;
   --color-border: #d9dbde;
   --color-background: #edeef2;
   --color-division-hotbox: #f82b60;
@@ -11,7 +11,7 @@
 }
 
 html {
-  font-family: 'Poppins', 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: Poppins, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 body {
