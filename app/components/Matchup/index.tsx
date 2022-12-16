@@ -32,11 +32,15 @@ const getDateDisplay = (
   date: MatchupProps['date'],
   hours: MatchupProps['remainingHours']
 ) => {
-  if (!hours) {
+  if (typeof hours === 'undefined') {
     return new Intl.DateTimeFormat('en-US', {
       dateStyle: 'full',
       timeStyle: 'short',
     }).format(new Date(date));
+  }
+
+  if (hours === 0) {
+    return 'Match ending soon!';
   }
 
   if (hours > 0) {
@@ -100,7 +104,9 @@ export const Matchup = ({
           ) : (
             <>
               <span className="matchupActionsText">
-                <span className="emphasis">Cast your vote now!</span>
+                <span className="emphasis">
+                  Click here to cast your vote now!
+                </span>
               </span>
               <img
                 className="matchupActionsIcon"
