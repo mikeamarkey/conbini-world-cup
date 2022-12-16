@@ -10,7 +10,7 @@ type BaseMatchup = {
   itemId2?: string;
   vote1?: number;
   vote2?: number;
-  remainingHours?: number;
+  remainingMinutes?: number;
   round: string;
   tweet?: string;
 };
@@ -21,7 +21,7 @@ const fieldsSchema = z.object({
   'Item 2': z.array(z.string()).optional(),
   'Vote 1': z.number().optional(),
   'Vote 2': z.number().optional(),
-  'Remaining Hours': z.number().optional(),
+  'Remaining Minutes': z.number().optional(),
   'Round': z.string(),
   'Tweet': z.string().optional(),
 });
@@ -46,7 +46,7 @@ export async function getBaseMatchups({
       itemId2: fields['Item 2']?.[0] ?? undefined,
       vote1: fields['Vote 1'],
       vote2: fields['Vote 2'],
-      remainingHours: fields['Remaining Hours'],
+      remainingMinutes: fields['Remaining Minutes'],
       round: fields.Round,
       tweet: fields.Tweet,
     };
@@ -65,8 +65,14 @@ export async function getMatchups({
   ]);
 
   const matchups = baseMatchups.map((baseMatchup) => {
-    const { itemId1, itemId2, vote1, vote2, ...baseMatchupValues } =
-      baseMatchup;
+    const {
+      itemId1,
+      itemId2,
+      remainingMinutes,
+      vote1,
+      vote2,
+      ...baseMatchupValues
+    } = baseMatchup;
 
     const item1 = items.find((item) => item.id === itemId1);
     const item2 = items.find((item) => item.id === itemId2);
@@ -76,10 +82,15 @@ export async function getMatchups({
     const winningItem = !isComplete ? undefined : vote1 > vote2 ? item1 : item2;
     const winningPercent = !isComplete ? undefined : Math.max(vote1, vote2);
 
+    const remainingHours =
+      typeof remainingMinutes !== 'undefined'
+        ? Math.floor(remainingMinutes / 60)
+        : undefined;
+
     const matchState: MatchupProps['matchState'] =
-      typeof baseMatchupValues.remainingHours === 'undefined'
+      typeof remainingHours === 'undefined'
         ? 'scheduled'
-        : baseMatchupValues.remainingHours < 0
+        : remainingHours < 0
         ? 'complete'
         : 'ongoing';
 
@@ -88,6 +99,7 @@ export async function getMatchups({
       item1,
       item2,
       matchState,
+      remainingHours,
       winner:
         winningItem && winningPercent
           ? {

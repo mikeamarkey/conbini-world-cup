@@ -39,15 +39,15 @@ const getDateDisplay = (
     }).format(new Date(date));
   }
 
-  if (hours === 0) {
+  if (hours < 0) {
+    return 'Match complete';
+  }
+
+  if (hours <= 1) {
     return 'Match ending soon!';
   }
 
-  if (hours > 0) {
-    return `${hours} hours remaining`;
-  }
-
-  return 'Match complete';
+  return `${hours} hours remaining`;
 };
 
 export const Matchup = ({
