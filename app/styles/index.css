@@ -1,11 +1,38 @@
+.tablist {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 48px;
+}
+
+.tablistItem {
+  padding: 0 0 6px;
+  border: unset;
+  border-bottom: 4px solid transparent;
+  background: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.tablistItem[data-headlessui-state='selected'] {
+  border-color: var(--color-primary);
+}
+
+.tablistItem + .tablistItem {
+  margin-left: 24px;
+}
+
 .index {
-  margin: 16px;
+  margin: 16px 48px;
   padding-bottom: 16px;
 }
 
 @media screen and (max-width: 768px) {
+  .tablist {
+    padding: 0 16px;
+  }
+
   .index {
-    margin: 8px;
+    margin: 8px 16px;
     padding-bottom: 8px;
   }
 }

@@ -9,7 +9,7 @@ import {
 } from '@remix-run/react';
 import reset from '~/styles/reset.css';
 import global from '~/styles/global.css';
-import { Header, headerStyles } from '~/components/Heading';
+import { Header, headerStyles } from '~/components';
 
 export const links: LinksFunction = () => {
   return [

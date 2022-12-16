@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: start;
   padding: 16px;
-  border-bottom: 1px solid var(--color-border);
   background-color: var(--color-white);
 }
 

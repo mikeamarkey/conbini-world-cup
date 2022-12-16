@@ -1,3 +1,4 @@
+import { Tab } from '@headlessui/react';
 import type { LinksFunction, LoaderArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
@@ -32,45 +33,59 @@ export default function Index() {
   );
 
   return (
-    <div className="index">
-      <div className="indexLink">
-        <a href="https://twitter.com/conbiniboys/status/1599411940358438913?s=20&t=TrVXXdz6UPGXZUHToYEXYg">
-          Information
-        </a>
-      </div>
+    <Tab.Group>
+      <Tab.List className="tablist">
+        <Tab className="tablistItem">Matchups</Tab>
+        <Tab className="tablistItem">Information</Tab>
+      </Tab.List>
 
-      <div className="indexLink">
-        <a href="https://docs.google.com/spreadsheets/u/3/d/1kyKhbq6h-8Qe_RWgavOBb34pHgVkIr2nznjbp8eeszY/copy#gid=0">
-          Download link for Brackets
-        </a>
-      </div>
+      <Tab.Panels>
+        <Tab.Panel>
+          <div className="index">
+            <div className="indexMatchups">
+              <h2>Ongoing Matches</h2>
+              {ongoingMatches.map((matchup) => (
+                <div key={matchup.id}>
+                  <Matchup {...matchup} />
+                </div>
+              ))}
+            </div>
 
-      <div className="indexMatchups">
-        <h2>Ongoing Matches</h2>
-        {ongoingMatches.map((matchup) => (
-          <div key={matchup.id}>
-            <Matchup {...matchup} />
+            <div className="indexMatchups">
+              <h2>Recent Matches</h2>
+              {completedMatches.map((matchup) => (
+                <div className="indexMatchupsDisabled" key={matchup.id}>
+                  <Matchup {...matchup} />
+                </div>
+              ))}
+            </div>
+
+            <div className="indexMatchups">
+              <h2>Future Matches</h2>
+              {futureMatches.map((matchup) => (
+                <div className="indexMatchupsDisabled" key={matchup.id}>
+                  <Matchup {...matchup} />
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
+        </Tab.Panel>
+        <Tab.Panel>
+          <div className="index">
+            <div className="indexLink">
+              <a href="https://twitter.com/conbiniboys/status/1599411940358438913?s=20&t=TrVXXdz6UPGXZUHToYEXYg">
+                Information
+              </a>
+            </div>
 
-      <div className="indexMatchups">
-        <h2>Recent Matches</h2>
-        {completedMatches.map((matchup) => (
-          <div className="indexMatchupsDisabled" key={matchup.id}>
-            <Matchup {...matchup} />
+            <div className="indexLink">
+              <a href="https://docs.google.com/spreadsheets/u/3/d/1kyKhbq6h-8Qe_RWgavOBb34pHgVkIr2nznjbp8eeszY/copy#gid=0">
+                Download link for Brackets
+              </a>
+            </div>
           </div>
-        ))}
-      </div>
-
-      <div className="indexMatchups">
-        <h2>Future Matches</h2>
-        {futureMatches.map((matchup) => (
-          <div className="indexMatchupsDisabled" key={matchup.id}>
-            <Matchup {...matchup} />
-          </div>
-        ))}
-      </div>
-    </div>
+        </Tab.Panel>
+      </Tab.Panels>
+    </Tab.Group>
   );
 }
