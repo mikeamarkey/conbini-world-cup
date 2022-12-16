@@ -9,6 +9,7 @@ export type MatchupProps = {
   date: string;
   item1?: Omit<ItemProps, 'isWinner'>;
   item2?: Omit<ItemProps, 'isWinner'>;
+  remainingHours?: number;
   round: string;
   tweet?: string;
   winner?: {
@@ -26,23 +27,39 @@ export const matchupStyles: LinksFunction = () => [
   },
 ];
 
+const getDateDisplay = (
+  date: MatchupProps['date'],
+  hours: MatchupProps['remainingHours']
+) => {
+  if (!hours) {
+    return new Intl.DateTimeFormat('en-US', {
+      dateStyle: 'full',
+      timeStyle: 'short',
+    }).format(new Date(date));
+  }
+
+  if (hours > 0) {
+    return `Current match (${hours} hours left)`;
+  }
+
+  return 'Match complete';
+};
+
 export const Matchup = ({
   date,
   item1,
   item2,
+  remainingHours,
   round,
   tweet,
   winner,
 }: MatchupProps) => {
-  const formattedDate = new Intl.DateTimeFormat('en-US', {
-    dateStyle: 'full',
-    timeStyle: 'short',
-  }).format(new Date(date));
+  const dateDisplay = getDateDisplay(date, remainingHours);
 
   return (
     <div className="matchup">
       <div className="matchupDetails">
-        <h3 className="matchupDetailsDate">{formattedDate}</h3>
+        <h3 className="matchupDetailsDate">{dateDisplay}</h3>
         <p className="matchupDetailsRound">{round}</p>
       </div>
 

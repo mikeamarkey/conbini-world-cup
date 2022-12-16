@@ -7,9 +7,10 @@ type BaseMatchup = {
   id: string;
   date: string;
   itemId1?: string;
-  vote1?: number;
   itemId2?: string;
+  vote1?: number;
   vote2?: number;
+  remainingHours?: number;
   round: string;
   tweet?: string;
 };
@@ -17,9 +18,10 @@ type BaseMatchup = {
 const fieldsSchema = z.object({
   'Date': z.string(),
   'Item 1': z.array(z.string()).optional(),
-  'Vote 1': z.number().optional(),
   'Item 2': z.array(z.string()).optional(),
+  'Vote 1': z.number().optional(),
   'Vote 2': z.number().optional(),
+  'Remaining Hours': z.number().optional(),
   'Round': z.string(),
   'Tweet': z.string().optional(),
 });
@@ -41,9 +43,10 @@ export async function getBaseMatchups({
       date: fields.Date,
       id: baseMatchup.id,
       itemId1: fields['Item 1']?.[0] ?? undefined,
-      vote1: fields['Vote 1'],
       itemId2: fields['Item 2']?.[0] ?? undefined,
+      vote1: fields['Vote 1'],
       vote2: fields['Vote 2'],
+      remainingHours: fields['Remaining Hours'],
       round: fields.Round,
       tweet: fields.Tweet,
     };
