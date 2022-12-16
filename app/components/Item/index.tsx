@@ -44,7 +44,7 @@ const DecidedItem = ({
           <span>{name}</span>
           {isWinner && (
             <div className="winner">
-              <span className="winnerIcon">✓</span>
+              <span className="winnerIcon">✔</span>
             </div>
           )}
         </div>
