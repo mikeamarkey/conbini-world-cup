@@ -26,8 +26,7 @@ export default function Index() {
   );
   const completedMatches = matchups
     .filter((matchup) => matchup.matchState === 'complete')
-    .reverse()
-    .slice(0, 5);
+    .reverse();
   const futureMatches = matchups.filter(
     (matchup) => matchup.matchState === 'scheduled'
   );
@@ -54,7 +53,7 @@ export default function Index() {
             <div className="indexMatchups">
               <h2>Recent Matches</h2>
               {completedMatches.map((matchup) => (
-                <div className="indexMatchupsDisabled" key={matchup.id}>
+                <div key={matchup.id}>
                   <Matchup {...matchup} />
                 </div>
               ))}
