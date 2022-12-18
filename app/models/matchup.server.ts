@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { MatchupProps } from '~/components';
+import type { Env } from '~/types/remix';
 import { config, createRequest, createResponseSchema } from './base.server';
 import { getItems } from './items.server';
 
@@ -29,7 +30,7 @@ const fieldsSchema = z.object({
 export async function getBaseMatchups({
   airtableToken,
 }: {
-  airtableToken: unknown;
+  airtableToken: Env['AIRTABLE_TOKEN'];
 }): Promise<BaseMatchup[]> {
   const baseMatchupsData = await createRequest(
     airtableToken,
@@ -57,7 +58,7 @@ export async function getBaseMatchups({
 export async function getMatchups({
   airtableToken,
 }: {
-  airtableToken: unknown;
+  airtableToken: Env['AIRTABLE_TOKEN'];
 }): Promise<MatchupProps[]> {
   const [baseMatchups, items] = await Promise.all([
     getBaseMatchups({ airtableToken }),

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import type { ItemProps } from '~/components';
 import { divisions } from '~/components';
+import type { Env } from '~/types/remix';
 import { config, createRequest, createResponseSchema } from './base.server';
 
 const fieldsSchema = z.object({
@@ -19,7 +20,7 @@ const fieldsSchema = z.object({
 export async function getItems({
   airtableToken,
 }: {
-  airtableToken: unknown;
+  airtableToken: Env['AIRTABLE_TOKEN'];
 }): Promise<Omit<ItemProps, 'isWinner'>[]> {
   const itemsData = await createRequest(
     airtableToken,

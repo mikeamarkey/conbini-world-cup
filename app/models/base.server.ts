@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { Context } from '~/types/remix';
 
 const airtable = {
   baseUrl: 'https://api.airtable.com/v0/appy4ar57OXD2UHpz',
@@ -14,7 +15,10 @@ export const config = {
   },
 };
 
-export const createRequest = async (token: unknown, url: string) => {
+export const createRequest = async (
+  token: Context['AIRTABLE_TOKEN'],
+  url: string
+) => {
   const result = await fetch(url, {
     method: 'GET',
     headers: {
