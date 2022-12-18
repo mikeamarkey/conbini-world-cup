@@ -12,7 +12,7 @@
     "check:style": "stylelint --cache app/**/*.css",
     "check:types": "tsc -b",
     "dev:remix": "remix watch",
-    "dev:wrangler": "cross-env NODE_ENV=development wrangler pages --compatibility-date=2022-12-07 dev ./public --binding $(cat .env)",
+    "dev:wrangler": "cross-env NODE_ENV=development wrangler pages --compatibility-date=2022-12-07 dev ./public --kv CWC_KV --binding $(cat .env)",
     "dev": "remix build && run-p \"dev:*\"",
     "fix": "run-p \"fix:*\"",
     "fix:format": "npm run check:format -- --write",
