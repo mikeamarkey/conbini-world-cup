@@ -7,17 +7,17 @@ import { getMatchups } from '~/models/matchup.server';
 import indexStyles from '~/styles/index.css';
 
 export const loader = async ({ context }: LoaderArgs) => {
-  // @ts-ignore
-  const stored = (await context.CWC_KV.get('test', {
+  const cachedMatchups = await context.CWC_KV.get<
+    Awaited<ReturnType<typeof getMatchups>>
+  >('matchups', {
     type: 'json',
-  })) as Awaited<ReturnType<typeof getMatchups>>;
-  if (stored) {
-    return json(stored);
+  });
+  if (cachedMatchups) {
+    return json(cachedMatchups);
   }
 
   const matchups = await getMatchups({ airtableToken: context.AIRTABLE_TOKEN });
-  // @ts-ignore
-  await context.CWC_KV.put('test', JSON.stringify(matchups), {
+  await context.CWC_KV.put('matchups', JSON.stringify(matchups), {
     expirationTtl: 60,
   });
   return json(matchups);
