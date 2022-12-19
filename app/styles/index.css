@@ -25,6 +25,7 @@
 .tabpanel {
   margin: 16px 48px;
   padding-bottom: 16px;
+  outline: none;
 }
 
 @media screen and (max-width: 768px) {

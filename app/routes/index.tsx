@@ -117,8 +117,8 @@ export default function Index() {
               Each day for the next couple of weeks we will release a number
               matches, and we need <span className="emphasis">YOUR</span> help
               to decide the winners! All matches will be decided through polls
-              on twitter, so please click on the links add your votes to help us
-              crown the champion of the Conbini World Cup 2022!
+              on twitter, so please click on the links, add your votes, and help
+              us crown the champion of the Conbini World Cup 2022!
             </p>
           </div>
         </Tab.Panel>

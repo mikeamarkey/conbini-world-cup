@@ -16,9 +16,9 @@
 
 .itemDetailsDivision {
   display: inline-block;
-  padding: 0 6px;
+  padding: 2px 8px;
   border-radius: 16px;
-  background-color: darkgray;
+  background-color: var(--color-gray);
   color: var(--color-white);
   font-size: 12px;
 }
