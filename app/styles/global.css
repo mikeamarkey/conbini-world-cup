@@ -4,10 +4,11 @@
   --color-black: #000;
   --color-border: #d9dbde;
   --color-background: #edeef2;
-  --color-division-hotbox: #f82b60;
-  --color-division-snack: #20c933;
-  --color-division-meal: #fcb400;
-  --color-division-beverage: #2d7ff9;
+  --color-division-hotbox: #f9d74e;
+  --color-division-snack: #377e3f;
+  --color-division-meal: #e7547f;
+  --color-division-beverage: #283cf4;
+  --width-max-content: 920px;
 }
 
 html {

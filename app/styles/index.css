@@ -22,7 +22,7 @@
   margin-left: 24px;
 }
 
-.index {
+.tabpanel {
   margin: 16px 48px;
   padding-bottom: 16px;
 }
@@ -32,7 +32,7 @@
     padding: 0 16px;
   }
 
-  .index {
+  .tabpanel {
     margin: 8px 16px;
     padding-bottom: 8px;
   }
@@ -53,4 +53,24 @@
 
 .indexMatchupsDisabled {
   opacity: 0.6;
+}
+
+.brackets {
+  max-width: var(--width-max-content);
+  margin: 16px auto;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--color-white);
+}
+
+.bracketsImage {
+  margin-top: 16px;
+}
+
+.information {
+  max-width: var(--width-max-content);
+  margin: 16px auto;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--color-white);
 }

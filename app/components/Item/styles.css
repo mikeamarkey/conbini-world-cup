@@ -10,21 +10,22 @@
 
 .itemImage {
   object-fit: contain;
-  height: 128px;
   width: 128px;
+  height: 128px;
 }
 
 .itemDetailsDivision {
   display: inline-block;
   padding: 0 6px;
-  font-size: 12px;
   border-radius: 16px;
-  color: var(--color-white);
   background-color: darkgray;
+  color: var(--color-white);
+  font-size: 12px;
 }
 
 .itemDetailsDivision--hotbox {
   background-color: var(--color-division-hotbox);
+  color: var(--color-black);
 }
 
 .itemDetailsDivision--snack {
@@ -70,7 +71,7 @@
   }
 
   .item--right {
-    margin-top: 16px;
     align-self: end;
+    margin-top: 16px;
   }
 }
