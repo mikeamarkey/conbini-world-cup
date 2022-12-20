@@ -1,0 +1,18 @@
+.bracketsContent {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--color-white);
+}
+
+.bracketsContentLink {
+  display: block;
+}
+
+.bracketsContentLink + .bracketsContentLink {
+  margin-top: 16px;
+}
+
+.bracketsContentImage {
+  margin-top: 16px;
+}

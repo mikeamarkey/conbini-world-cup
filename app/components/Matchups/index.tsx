@@ -3,7 +3,7 @@ import type { MatchupProps } from '../Matchup';
 import { Matchup, matchupStyles } from '../Matchup';
 import styles from './styles.css';
 
-type MatchupsProps = {
+export type MatchupsProps = {
   matchups: MatchupProps[];
 };
 

@@ -1,7 +1,3 @@
-.matchups {
-  margin-top: 16px;
-}
-
 .matchupsGroup + .matchupsGroup {
   margin-top: 48px;
 }
