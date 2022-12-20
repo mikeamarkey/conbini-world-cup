@@ -62,7 +62,7 @@ export const Matchup = ({
   const dateDisplay = getDateDisplay(date, remainingHours);
 
   return (
-    <div className="matchup">
+    <div className="card matchup">
       <div className="matchupDetails">
         <h3 className="matchupDetailsDate">{dateDisplay}</h3>
         <p className="matchupDetailsRound">{round}</p>

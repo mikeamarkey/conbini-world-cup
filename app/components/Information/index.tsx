@@ -15,7 +15,7 @@ export const Information = () => {
   return (
     <div className="information">
       <h2>What Is This?</h2>
-      <div className="informationContent">
+      <div className="card informationContent">
         <p>
           In 2020, we held the first ever Conbini Tournament, pitting 64 conbini
           items in 4 different divisions against one another to decide the best

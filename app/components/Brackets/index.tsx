@@ -15,7 +15,7 @@ export const Brackets = () => {
   return (
     <div className="brackets">
       <h2>Check Out the Brackets</h2>
-      <div className="bracketsContent">
+      <div className="card bracketsContent">
         <a
           className="bracketsContentLink"
           href="https://docs.google.com/spreadsheets/d/1NiAOum_dh0k0p4I6IgHyLRtUrEHqHxccBeGcJdHde90/edit#gid=0"
