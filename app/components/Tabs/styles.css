@@ -31,6 +31,12 @@
 .tabpanelContent {
   max-width: 920px;
   margin: auto;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.tabpanelContent--visible {
+  opacity: 1;
 }
 
 @media screen and (max-width: 768px) {

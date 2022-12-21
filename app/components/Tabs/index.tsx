@@ -33,6 +33,7 @@ const tabs: {
 
 export const Tabs = ({ route, children }: TabsProps) => {
   const activeIndex = tabs.findIndex((tab) => tab.route === route);
+  const activeRoute = tabs[activeIndex].route;
   const navigate = useNavigate();
   return (
     <Tab.Group
@@ -50,7 +51,13 @@ export const Tabs = ({ route, children }: TabsProps) => {
       <Tab.Panels>
         {tabs.map(({ route }) => (
           <Tab.Panel key={route} className="tabpanel">
-            <div className="tabpanelContent">{children}</div>
+            <div
+              className={`tabpanelContent ${
+                route === activeRoute ? 'tabpanelContent--visible' : ''
+              }`}
+            >
+              {children}
+            </div>
           </Tab.Panel>
         ))}
       </Tab.Panels>

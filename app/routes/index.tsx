@@ -1,7 +1,7 @@
 import type { LinksFunction, LoaderArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
-import { Matchup, matchupStyles, Tabs } from '~/components';
+import { Matchup, matchupStyles } from '~/components';
 import { getMatchups } from '~/models/matchup.server';
 import styles from '~/styles/index.css';
 
@@ -46,7 +46,7 @@ export default function Index() {
   const hasUpcomingMatches = upcomingMatches.length > 0;
 
   return (
-    <Tabs route="index">
+    <div className="index">
       <div className="matchupsGroup" id="ongoing">
         <h2>Ongoing Matches</h2>
         {hasOngoingMatches ? (
@@ -90,6 +90,6 @@ export default function Index() {
           </div>
         ))}
       </div>
-    </Tabs>
+    </div>
   );
 }

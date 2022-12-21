@@ -29,3 +29,15 @@ body {
 .emphasis {
   font-weight: 600;
 }
+
+.content--visible {
+  opacity: 1;
+}
+
+.content--hidden {
+  opacity: 0;
+}
+
+.content--animating {
+  transition: opacity 0.3s ease-in-out;
+}
