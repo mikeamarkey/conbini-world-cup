@@ -6,10 +6,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from '@remix-run/react';
 import reset from '~/styles/reset.css';
 import global from '~/styles/global.css';
-import { Header, headerStyles } from '~/components';
+import { Header, headerStyles, Tabs, tabsStyles } from '~/components';
 
 export const links: LinksFunction = () => {
   return [
@@ -26,6 +27,7 @@ export const links: LinksFunction = () => {
       href: global,
     },
     ...headerStyles(),
+    ...tabsStyles(),
   ];
 };
 
@@ -36,6 +38,8 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const { pathname } = useLocation();
+
   return (
     <html lang="en">
       <head>
@@ -45,7 +49,9 @@ export default function App() {
       <body>
         <div id="app">
           <Header />
-          <Outlet />
+          <Tabs route={pathname}>
+            <Outlet />
+          </Tabs>
         </div>
         <ScrollRestoration />
         <Scripts />

@@ -2,9 +2,9 @@ import type { LinksFunction } from '@remix-run/cloudflare';
 import bracketsImage from '~/assets/brackets.png';
 import bracketsMattImage from '~/assets/brackets-matt.png';
 import bracketsMikeImage from '~/assets/brackets-mike.png';
-import styles from './styles.css';
+import styles from '~/styles/brackets.css';
 
-export const bracketsStyles: LinksFunction = () => {
+export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
@@ -13,7 +13,7 @@ export const bracketsStyles: LinksFunction = () => {
   ];
 };
 
-export const Brackets = () => {
+export default function Brackets() {
   return (
     <div className="brackets">
       <div className="bracketsGroup">
@@ -53,4 +53,4 @@ export const Brackets = () => {
       </div>
     </div>
   );
-};
+}
