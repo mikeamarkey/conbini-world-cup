@@ -1,6 +1,6 @@
 import { Tab } from '@headlessui/react';
 import type { LinksFunction } from '@remix-run/cloudflare';
-import { Outlet, useSearchParams } from '@remix-run/react';
+import { Outlet, useNavigate } from '@remix-run/react';
 import styles from './styles.css';
 
 export const tabsStyles: LinksFunction = () => [
@@ -10,45 +10,36 @@ export const tabsStyles: LinksFunction = () => [
   },
 ];
 
-const tabKeys = ['matchups', 'brackets', 'information'] as const;
-
 const tabs: {
-  tab: typeof tabKeys[number];
+  route: string;
   name: string;
 }[] = [
   {
-    tab: 'matchups',
+    route: '',
     name: 'Matchups',
   },
-  { tab: 'brackets', name: 'Brackets' },
+  { route: 'brackets', name: 'Brackets' },
   {
-    tab: 'information',
+    route: 'information',
     name: 'Information',
   },
 ];
 
 export const Tabs = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const tabParam = searchParams.get('tab');
-  const activeTab = tabs.findIndex((tab) => tab.tab === tabParam);
-  const activeTabIndex = activeTab >= 0 ? activeTab : 0;
-
+  const navigate = useNavigate();
   return (
-    <Tab.Group
-      defaultIndex={activeTabIndex}
-      onChange={(index) => setSearchParams({ tab: tabs[index].tab })}
-    >
+    <Tab.Group onChange={(index) => navigate(tabs[index].route)}>
       <Tab.List className="tablist">
-        {tabs.map(({ tab, name }) => (
-          <Tab key={tab} className="tablistItem">
+        {tabs.map(({ route, name }) => (
+          <Tab key={route} className="tablistItem">
             {name}
           </Tab>
         ))}
       </Tab.List>
 
       <Tab.Panels>
-        {tabs.map(({ tab }) => (
-          <Tab.Panel key={tab} className="tabpanel">
+        {tabs.map(({ route }) => (
+          <Tab.Panel key={route} className="tabpanel">
             <Outlet />
           </Tab.Panel>
         ))}
