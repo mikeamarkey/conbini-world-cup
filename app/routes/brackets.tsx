@@ -3,8 +3,9 @@ import bracketsImage from '~/assets/brackets.png';
 import bracketsMattImage from '~/assets/brackets-matt.png';
 import bracketsMikeImage from '~/assets/brackets-mike.png';
 import styles from '~/styles/brackets.css';
+import { Tabs } from '~/components';
 
-export const bracketsStyles: LinksFunction = () => {
+export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
@@ -15,7 +16,7 @@ export const bracketsStyles: LinksFunction = () => {
 
 export default function Brackets() {
   return (
-    <div className="brackets">
+    <Tabs route="/brackets">
       <div className="bracketsGroup">
         <h2>Official Brackets</h2>
         <div className="card bracketsContent">
@@ -51,6 +52,6 @@ export default function Brackets() {
           <img src={bracketsMikeImage} alt="brackets" />
         </div>
       </div>
-    </div>
+    </Tabs>
   );
 }

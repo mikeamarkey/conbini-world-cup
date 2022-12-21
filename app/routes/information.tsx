@@ -1,8 +1,9 @@
 import type { LinksFunction } from '@remix-run/cloudflare';
 import twitter from '~/assets/twitter.png';
+import { Tabs } from '~/components';
 import styles from '~/styles/information.css';
 
-export const informationStyles: LinksFunction = () => {
+export const links: LinksFunction = () => {
   return [
     {
       rel: 'stylesheet',
@@ -13,7 +14,7 @@ export const informationStyles: LinksFunction = () => {
 
 export default function Information() {
   return (
-    <div className="information">
+    <Tabs route="/information">
       <h2>What Is This?</h2>
       <div className="card informationContent">
         <p>
@@ -53,6 +54,6 @@ export default function Information() {
           />
         </a>
       </div>
-    </div>
+    </Tabs>
   );
 }

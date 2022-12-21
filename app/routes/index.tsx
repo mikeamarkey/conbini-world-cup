@@ -1,9 +1,9 @@
 import type { LinksFunction, LoaderArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
-import { Matchup, matchupStyles } from '~/components';
+import { Matchup, matchupStyles, Tabs } from '~/components';
 import { getMatchups } from '~/models/matchup.server';
-import indexStyles from '~/styles/index.css';
+import styles from '~/styles/index.css';
 
 export const loader = async ({ context }: LoaderArgs) => {
   const cachedMatchups = await context.CWC_KV.get<
@@ -26,7 +26,7 @@ export const links: LinksFunction = () => [
   ...matchupStyles(),
   {
     rel: 'stylesheet',
-    href: indexStyles,
+    href: styles,
   },
 ];
 
@@ -46,8 +46,8 @@ export default function Index() {
   const hasUpcomingMatches = upcomingMatches.length > 0;
 
   return (
-    <div className="index">
-      <div className="group" id="ongoing">
+    <Tabs route="index">
+      <div className="matchupsGroup" id="ongoing">
         <h2>Ongoing Matches</h2>
         {hasOngoingMatches ? (
           ongoingMatches.map((matchup) => (
@@ -73,7 +73,7 @@ export default function Index() {
         )}
       </div>
 
-      <div className="group" id="completed">
+      <div className="matchupsGroup" id="completed">
         <h2>Recent Matches</h2>
         {completedMatches.map((matchup) => (
           <div key={matchup.id}>
@@ -82,14 +82,14 @@ export default function Index() {
         ))}
       </div>
 
-      <div className="group" id="upcoming">
+      <div className="matchupsGroup" id="upcoming">
         <h2>Upcoming Matches</h2>
         {upcomingMatches.map((matchup) => (
-          <div className="groupDisabled" key={matchup.id}>
+          <div className="matchupsGroupDisabled" key={matchup.id}>
             <Matchup {...matchup} />
           </div>
         ))}
       </div>
-    </div>
+    </Tabs>
   );
 }
