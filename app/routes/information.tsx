@@ -1,6 +1,6 @@
 import type { LinksFunction } from '@remix-run/cloudflare';
 import twitter from '~/assets/twitter.png';
-import styles from './styles.css';
+import styles from '~/styles/information.css';
 
 export const informationStyles: LinksFunction = () => {
   return [
@@ -11,7 +11,7 @@ export const informationStyles: LinksFunction = () => {
   ];
 };
 
-export const Information = () => {
+export default function Information() {
   return (
     <div className="information">
       <h2>What Is This?</h2>
@@ -55,4 +55,4 @@ export const Information = () => {
       </div>
     </div>
   );
-};
+}

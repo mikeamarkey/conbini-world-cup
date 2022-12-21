@@ -1,16 +1,7 @@
-import { Tab } from '@headlessui/react';
 import type { LinksFunction, LoaderArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
-import { useLoaderData, useSearchParams } from '@remix-run/react';
-import type { MatchupsProps } from '~/components';
-import {
-  Brackets,
-  bracketsStyles,
-  Information,
-  informationStyles,
-  Matchups,
-  matchupsStyles,
-} from '~/components';
+import { useLoaderData } from '@remix-run/react';
+import { Matchup, matchupStyles } from '~/components';
 import { getMatchups } from '~/models/matchup.server';
 import indexStyles from '~/styles/index.css';
 
@@ -32,66 +23,73 @@ export const loader = async ({ context }: LoaderArgs) => {
 };
 
 export const links: LinksFunction = () => [
-  ...matchupsStyles(),
-  ...bracketsStyles(),
-  ...informationStyles(),
+  ...matchupStyles(),
   {
     rel: 'stylesheet',
     href: indexStyles,
   },
 ];
 
-const tabKeys = ['matchups', 'brackets', 'information'] as const;
-
-const tabs: {
-  tab: typeof tabKeys[number];
-  name: string;
-  Component: (props: MatchupsProps) => JSX.Element;
-}[] = [
-  {
-    tab: 'matchups',
-    name: 'Matchups',
-    Component: (props) => <Matchups matchups={props.matchups} />,
-  },
-  { tab: 'brackets', name: 'Brackets', Component: () => <Brackets /> },
-  {
-    tab: 'information',
-    name: 'Information',
-    Component: () => <Information />,
-  },
-];
-
 export default function Index() {
   const matchups = useLoaderData<typeof loader>();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const tabParam = searchParams.get('tab');
-  const activeTab = tabs.findIndex((tab) => tab.tab === tabParam);
-  const activeTabIndex = activeTab >= 0 ? activeTab : 0;
+
+  const ongoingMatches = matchups.filter(
+    (matchup) => matchup.matchState === 'ongoing'
+  );
+  const hasOngoingMatches = ongoingMatches.length > 0;
+  const completedMatches = matchups
+    .filter((matchup) => matchup.matchState === 'complete')
+    .reverse();
+  const upcomingMatches = matchups.filter(
+    (matchup) => matchup.matchState === 'scheduled'
+  );
+  const hasUpcomingMatches = upcomingMatches.length > 0;
 
   return (
     <div className="index">
-      <Tab.Group
-        defaultIndex={activeTabIndex}
-        onChange={(index) => setSearchParams({ tab: tabs[index].tab })}
-      >
-        <Tab.List className="tablist">
-          {tabs.map((tab) => (
-            <Tab key={tab.name} className="tablistItem">
-              {tab.name}
-            </Tab>
-          ))}
-        </Tab.List>
+      <div className="group" id="ongoing">
+        <h2>Ongoing Matches</h2>
+        {hasOngoingMatches ? (
+          ongoingMatches.map((matchup) => (
+            <div key={matchup.id}>
+              <Matchup {...matchup} />
+            </div>
+          ))
+        ) : (
+          <div className="card">
+            {hasUpcomingMatches ? (
+              <p>
+                No ongoing matches at the moment. Check out the{' '}
+                <a href="#upcoming">upcoming match schedule</a> for details on
+                when the next match begins!
+              </p>
+            ) : (
+              <p>
+                That's it for the World Cup 2022. Thanks to everyone who
+                followed along and voted!
+              </p>
+            )}
+          </div>
+        )}
+      </div>
 
-        <Tab.Panels>
-          {tabs.map(({ name, Component }) => (
-            <Tab.Panel key={name} className="tabpanel">
-              <div className="tabpanelContent">
-                <Component matchups={matchups} />
-              </div>
-            </Tab.Panel>
-          ))}
-        </Tab.Panels>
-      </Tab.Group>
+      <div className="group" id="completed">
+        <h2>Recent Matches</h2>
+        {completedMatches.map((matchup) => (
+          <div key={matchup.id}>
+            <Matchup {...matchup} />
+          </div>
+        ))}
+      </div>
+
+      <div className="group" id="upcoming">
+        <h2>Upcoming Matches</h2>
+        {upcomingMatches.map((matchup) => (
+          <div className="groupDisabled" key={matchup.id}>
+            <Matchup {...matchup} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

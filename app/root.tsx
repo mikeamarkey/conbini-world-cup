@@ -3,13 +3,12 @@ import {
   Links,
   LiveReload,
   Meta,
-  Outlet,
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
 import reset from '~/styles/reset.css';
 import global from '~/styles/global.css';
-import { Header, headerStyles } from '~/components';
+import { Header, headerStyles, Tabs, tabsStyles } from '~/components';
 
 export const links: LinksFunction = () => {
   return [
@@ -26,6 +25,7 @@ export const links: LinksFunction = () => {
       href: global,
     },
     ...headerStyles(),
+    ...tabsStyles(),
   ];
 };
 
@@ -45,7 +45,7 @@ export default function App() {
       <body>
         <div id="app">
           <Header />
-          <Outlet />
+          <Tabs />
         </div>
         <ScrollRestoration />
         <Scripts />
