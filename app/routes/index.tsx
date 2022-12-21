@@ -1,7 +1,7 @@
 import { Tab } from '@headlessui/react';
 import type { LinksFunction, LoaderArgs } from '@remix-run/cloudflare';
 import { json } from '@remix-run/cloudflare';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useSearchParams } from '@remix-run/react';
 import type { MatchupsProps } from '~/components';
 import {
   Brackets,
@@ -41,21 +41,39 @@ export const links: LinksFunction = () => [
   },
 ];
 
-const tabs = [
+const tabKeys = ['matchups', 'brackets', 'information'] as const;
+
+const tabs: {
+  tab: typeof tabKeys[number];
+  name: string;
+  Component: (props: MatchupsProps) => JSX.Element;
+}[] = [
   {
+    tab: 'matchups',
     name: 'Matchups',
-    Component: (props: MatchupsProps) => <Matchups matchups={props.matchups} />,
+    Component: (props) => <Matchups matchups={props.matchups} />,
   },
-  { name: 'Brackets', Component: () => <Brackets /> },
-  { name: 'Information', Component: () => <Information /> },
+  { tab: 'brackets', name: 'Brackets', Component: () => <Brackets /> },
+  {
+    tab: 'information',
+    name: 'Information',
+    Component: () => <Information />,
+  },
 ];
 
 export default function Index() {
   const matchups = useLoaderData<typeof loader>();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabParam = searchParams.get('tab');
+  const activeTab = tabs.findIndex((tab) => tab.tab === tabParam);
+  const activeTabIndex = activeTab >= 0 ? activeTab : 0;
 
   return (
     <div className="index">
-      <Tab.Group>
+      <Tab.Group
+        defaultIndex={activeTabIndex}
+        onChange={(index) => setSearchParams({ tab: tabs[index].tab })}
+      >
         <Tab.List className="tablist">
           {tabs.map((tab) => (
             <Tab key={tab.name} className="tablistItem">
