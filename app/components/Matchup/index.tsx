@@ -50,6 +50,29 @@ const getDateDisplay = (
   return `${hours} hours remaining`;
 };
 
+const getOrderedItems = (
+  item1: MatchupProps['item1'],
+  item2: MatchupProps['item2']
+) => {
+  if (!item1 && !item2) {
+    return [item1, item2];
+  }
+
+  if (!item1) {
+    return [item2, item1];
+  }
+
+  if (!item2) {
+    return [item1, item2];
+  }
+
+  if (item2.seed < item1.seed) {
+    return [item2, item1];
+  }
+
+  return [item1, item2];
+};
+
 export const Matchup = ({
   date,
   item1,
@@ -60,6 +83,7 @@ export const Matchup = ({
   winner,
 }: MatchupProps) => {
   const dateDisplay = getDateDisplay(date, remainingHours);
+  const [left, right] = getOrderedItems(item1, item2);
 
   return (
     <div className="card matchup">
@@ -71,14 +95,14 @@ export const Matchup = ({
       <div className="matchupItems">
         <Item
           position="left"
-          isWinner={winner ? item1?.id === winner.id : false}
-          item={item1}
+          isWinner={winner ? left?.id === winner.id : false}
+          item={left}
         />
         <div className="matchupItemsVs">VS</div>
         <Item
           position="right"
-          isWinner={winner ? item2?.id === winner.id : false}
-          item={item2}
+          isWinner={winner ? right?.id === winner.id : false}
+          item={right}
         />
       </div>
 
